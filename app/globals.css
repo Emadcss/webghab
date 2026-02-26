@@ -1,0 +1,225 @@
+/* 1. فونت Vazirmatn از CDN (بهتر است بعداً به next/font منتقل بشه) */
+@import url("https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css");
+
+/* 2. ایمپورت اصلی Tailwind v4 — این خط ضروری است */
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* 3. تعریف تم و متغیرهای سفارشی با @theme (ویژگی جدید v4) */
+@theme {
+  --color-brand: #ff9d2e; /* نارنجی اصلی - برای call-to-action، لوگو */
+  --color-dark-navy: #000038; /* رنگ خیلی تیره برای dark mode یا header/footer */
+  --color-surface: #e6e7e9; /* background اصلی در light mode */
+  --color-muted: #bdbec0; /* متن کم‌رنگ، border، divider */
+  --color-white: #ffffff;
+  --color-black: #000000;
+
+  --radius-4xl: 2rem;
+  --radius-5xl: 3rem;
+  --radius-island: 3rem;
+}
+
+/* 4. لایه base — استایل‌های پایه و ریست */
+@layer base {
+  /* فونت فیس اضافی — فقط اگر نیاز داری نگه دار، چون از CDN ایمپورت کردی */
+  /* @font-face { ... } معمولاً لازم نیست تکرار بشه */
+
+  body {
+    font-family:
+      "Vazirmatn",
+      "Vazir",
+      system-ui,
+      -apple-system,
+      sans-serif;
+    background: var(--color-surface);
+    color: inherit;
+    margin: 0;
+    -webkit-tap-highlight-color: transparent;
+    @apply transition-colors duration-500;
+  }
+
+  /* dark mode بهتر با :root یا html مدیریت بشه نه .dark body */
+  :root {
+    color-scheme: light;
+  }
+
+  .dark {
+    --color-surface: var(--color-dark-navy); /* #000038 در dark mode */
+    --color-primary: var(--color-white); /* متن سفید در dark */
+    color: var(--color-white);
+  }
+
+  /* یا اگر از class .dark روی html استفاده می‌کنی: */
+  /* html.dark { background: #030308; } */
+}
+
+/* 5. لایه components — کامپوننت‌های سفارشی */
+@layer components {
+  /* بدون کلاس پایه جداگانه – مستقیم تعریف می‌کنیم */
+  .glass-header {
+    background: rgba(248, 248, 255, 0.82); /* کمی مات‌تر */
+    backdrop-filter: blur(18px) saturate(160%);
+    -webkit-backdrop-filter: blur(18px) saturate(160%);
+    border: 1px solid rgba(200, 200, 230, 0.5);
+    box-shadow: 0 8px 32px -12px rgba(0, 0, 0, 0.1);
+    transition: all 0.35s ease;
+  }
+
+  .dark .glass-header {
+    background: rgba(25, 25, 55, 0.85);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    box-shadow: 0 8px 32px -12px rgba(0, 0, 0, 0.6);
+  }
+
+  /* شیشه‌ای عمیق برای مگامنو */
+  .glass-mega {
+    background: linear-gradient(
+      45deg,
+      rgba(250, 250, 255, 0.45) 0%,
+      rgba(235, 235, 245, 0.35) 100%
+    );
+    backdrop-filter: blur(32px) saturate(180%);
+    -webkit-backdrop-filter: blur(32px) saturate(180%);
+    border: 1px solid rgba(180, 180, 220, 0.35);
+    box-shadow: 0 35px 100px -30px rgba(0, 0, 0, 0.18);
+    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  .dark .glass-mega {
+    background: linear-gradient(
+      45deg,
+      rgba(15, 15, 45, 0.75) 0%,
+      rgba(5, 5, 35, 0.65) 100%
+    );
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 35px 100px -30px rgba(0, 0, 0, 0.75);
+  }
+
+  /* حالت فعال / hover */
+  .glass-active {
+    background: linear-gradient(
+      45deg,
+      rgba(255, 255, 255, 0.92) 0%,
+      rgba(240, 240, 255, 0.85) 100%
+    );
+    backdrop-filter: blur(20px) saturate(200%);
+    -webkit-backdrop-filter: blur(20px) saturate(200%);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    box-shadow: 0 18px 55px -18px rgba(0, 0, 0, 0.2);
+    border-color: theme("colors.brand");
+    transform: scale(1.018);
+    transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  .dark .glass-active {
+    background: linear-gradient(
+      45deg,
+      rgba(50, 50, 90, 0.94) 0%,
+      rgba(30, 30, 70, 0.88) 100%
+    );
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    box-shadow: 0 18px 55px -18px rgba(0, 0, 0, 0.7);
+    border-color: theme("colors.brand");
+    transform: scale(1.018);
+  }
+
+  .glass-drawer {
+    background: linear-gradient(
+      135deg,
+      rgba(250, 250, 255, 0.48) 0%,
+      rgba(235, 235, 245, 0.38) 100%
+    );
+    backdrop-filter: blur(32px) saturate(190%);
+    -webkit-backdrop-filter: blur(32px) saturate(190%);
+    border-left: 1px solid rgba(180, 180, 220, 0.4);
+    box-shadow: -20px 0 60px -20px rgba(0, 0, 0, 0.25);
+    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .dark .glass-drawer {
+    background: linear-gradient(
+      135deg,
+      rgba(15, 15, 45, 0.82) 0%,
+      rgba(5, 5, 35, 0.72) 100%
+    );
+    border-left: 1px solid rgba(255, 255, 255, 0.09);
+    box-shadow: -20px 0 60px -20px rgba(0, 0, 0, 0.8);
+  }
+
+  .drawer-overlay {
+    background: rgba(0, 0, 0, 0.75);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
+
+  /* hover روی همه glassها */
+  .glass-header:hover,
+  .glass-mega:hover,
+  .glass-active:hover {
+    transform: translateY(-4px) scale(1.025);
+    box-shadow: 0 25px 70px -15px rgba(0, 0, 0, 0.2);
+  }
+
+  .dark .glass-header:hover,
+  .dark .glass-mega:hover,
+  .dark .glass-active:hover {
+    box-shadow: 0 25px 70px -15px rgba(0, 0, 0, 0.7);
+  }
+
+  .glass-drawer .text-muted,
+  .glass-drawer .text-primary {
+    color: #1a1a2e !important; /* تیره‌تر در light */
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  }
+
+  .dark .glass-drawer .text-muted,
+  .dark .glass-drawer .text-primary {
+    color: #f0f0ff !important;
+  }
+
+  /* تضمین خوانایی متن در glassها در light mode */
+  .glass-mega .text-white,
+  .glass-active .text-white {
+    color: #ffffff !important;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4); /* سایه متن برای خوانایی روی شیشه روشن */
+  }
+
+  /* نقطه‌ها (bullet) در Level 2 */
+  .glass-mega .bg-brand {
+    background-color: #ff9d2e !important; /* نارنجی پالتت */
+  }
+
+  .dark .glass-mega .bg-brand {
+    background-color: #ff9d2e !important;
+  }
+}
+
+.hero-gradient {
+  background: linear-gradient(110deg, #2d1b4d 0%, #f59e0b 100%);
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* 6. انیمیشن‌ها (خارج از لایه‌ها — خوبه همینجا بمونه) */
+@keyframes slideUp {
+  from {
+    transform: translateY(10px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.animate-fade-in {
+  animation: slideUp 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}

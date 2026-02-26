@@ -1,0 +1,31 @@
+
+{
+  "project_name": "Web Ghab Luxury (وب‌قاب)",
+  "version": "42.0.0-STABLE",
+  "last_checkpoint": "2024-07-09",
+  "architecture": {
+    "type": "Full-Stack Ready (React + Node/Express + PostgreSQL)",
+    "security_layer": "RBAC Matrix (Persistent)",
+    "monitoring": "Audit Log + Session Tracking (Database Backed)",
+    "appearance_engine": "Dynamic Storefront Architect (Real-time Visuals)",
+    "marketing_engine": "Conversion Trigger System (Social Proof & Popups)",
+    "address_engine": "Dynamic Geo-Database (Iran Provinces & Cities Linked)",
+    "validation_engine": "Strict Data Integrity (Phone, NationalID, PostalCode)",
+    "content_engine": "Enterprise Blog Suite (SEO Optimized & Analytics Ready)"
+  },
+  "modules": [
+    "UserSuite: Advanced Profile & Address Engine",
+    "MarketingHub: Campaign & FOMO Controller",
+    "AppearanceManagement: Hero, Campaign & Footer Controller",
+    "Admin Monitoring Hub (Persistent Logs)",
+    "CRM & Support Tickets",
+    "Payment & Shipping API Hub",
+    "BlogSuite: Full Content Lifecycle Management"
+  ],
+  "integrations_ready": [
+    "IranCities Database (Internal)",
+    "Iranian Banking Gateways",
+    "PostgreSQL Persistence Layer"
+  ],
+  "launch_strategy": "Enterprise Deployment Ready"
+}
